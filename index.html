@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BuySafely.Africa — Trade Without Fear</title>
+  <meta name="description" content="The trust Protocol for African social commerce. Zero scams. Zero app downloads. Your PoD token, entirely inside WhatsApp." />
+  <meta name="theme-color" content="#0a1a0f" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root{--green:#25D366;--green-dark:#128C7E;--amber:#F5A623;--bg:#04100A;--bg2:#081a0f;--surface:#0d2218;--border:rgba(37,211,102,0.15);--border2:rgba(37,211,102,0.08);--text:#e8f5ec;--text2:#8db89a;--text3:#4d7a5a;--white:#ffffff;--font-display:"Playfair Display",Georgia,serif;--font-body:"DM Sans",sans-serif;--font-mono:"DM Mono",monospace;}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-weight:400;line-height:1.6;overflow-x:hidden;min-height:100vh;}
+    ::selection{background:var(--green);color:#000;}
+    #bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;}
+    .kente-overlay{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:0.035;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Crect width='80' height='80' fill='none'/%3E%3Crect x='0' y='0' width='20' height='20' fill='%2325D366'/%3E%3Crect x='20' y='20' width='20' height='20' fill='%2325D366'/%3E%3Crect x='40' y='0' width='20' height='20' fill='%2325D366'/%3E%3Crect x='60' y='20' width='20' height='20' fill='%2325D366'/%3E%3Crect x='0' y='40' width='20' height='20' fill='%2325D366'/%3E%3Crect x='20' y='60' width='20' height='20' fill='%2325D366'/%3E%3Crect x='40' y='40' width='20' height='20' fill='%2325D366'/%3E%3Crect x='60' y='60' width='20' height='20' fill='%2325D366'/%3E%3Crect x='10' y='10' width='10' height='10' fill='%23F5A623'/%3E%3Crect x='30' y='30' width='10' height='10' fill='%23F5A623'/%3E%3Crect x='50' y='10' width='10' height='10' fill='%23F5A623'/%3E%3Crect x='70' y='30' width='10' height='10' fill='%23F5A623'/%3E%3Crect x='10' y='50' width='10' height='10' fill='%23F5A623'/%3E%3Crect x='30' y='70' width='10' height='10' fill='%23F5A623'/%3E%3Crect x='50' y='50' width='10' height='10' fill='%23F5A623'/%3E%3Crect x='70' y='70' width='10' height='10' fill='%23F5A623'/%3E%3C/svg%3E");background-size:80px 80px;}
+    .wrapper{position:relative;z-index:10;max-width:1100px;margin:0 auto;padding:0 24px;}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 40px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border2);background:rgba(4,16,10,0.75);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);}
+    .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+    .nav-logo-icon{width:34px;height:34px;background:var(--green);border-radius:8px;display:flex;align-items:center;justify-content:center;}
+    .nav-logo-icon svg{width:20px;height:20px;fill:#000;}
+    .nav-logo-text{font-family:var(--font-display);font-size:1.15rem;font-weight:700;color:var(--white);letter-spacing:-0.02em;}
+    .nav-logo-text span{color:var(--green);}
+    .nav-badge{font-family:var(--font-mono);font-size:0.68rem;letter-spacing:0.12em;color:var(--green);border:1px solid var(--green);border-radius:4px;padding:3px 8px;animation:badgePop 2s ease-in-out infinite;cursor:pointer;text-decoration:none;}
+    @keyframes badgePop{0%,100%{opacity:0.6;transform:scale(1);box-shadow:none;color:var(--green);background:transparent;}50%{opacity:1;transform:scale(1.1);box-shadow:0 0 14px rgba(37,211,102,0.7);color:#000;background:var(--green);}}
+    .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 24px 80px;}
+    .hero-eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--green);border:1px solid var(--border);border-radius:100px;padding:6px 16px;margin-bottom:36px;animation:fadeUp 0.8s ease both;}
+    .hero-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 2s ease infinite;}
+    @keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.4;transform:scale(0.7);}}
+    .hero-headline{font-family:var(--font-display);font-size:clamp(3rem,9vw,7.2rem);font-weight:900;line-height:1.0;letter-spacing:-0.03em;color:var(--white);max-width:900px;animation:fadeUp 0.8s 0.1s ease both;}
+    .hero-headline .italic{font-style:italic;color:var(--amber);}
+    .hero-sub{margin-top:28px;font-size:1.15rem;font-weight:300;color:var(--text2);max-width:580px;line-height:1.75;animation:fadeUp 0.8s 0.2s ease both;}
+    .hero-sub strong{color:var(--text);font-weight:500;}
+    .wa-mockup{margin:52px auto 0;width:100%;max-width:420px;background:#111b11;border-radius:20px;border:1px solid rgba(37,211,102,0.18);overflow:hidden;box-shadow:0 0 0 1px rgba(37,211,102,0.07),0 40px 80px rgba(0,0,0,0.6),0 0 80px rgba(37,211,102,0.06);animation:fadeUp 0.8s 0.3s ease both;}
+    .wa-header{background:#1f2c23;padding:14px 18px;display:flex;align-items:center;gap:12px;border-bottom:1px solid rgba(37,211,102,0.1);}
+    .wa-avatar{width:40px;height:40px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .wa-avatar svg{width:22px;height:22px;fill:#000;}
+    .wa-name{font-size:0.88rem;font-weight:600;color:var(--text);}
+    .wa-status{font-size:0.72rem;color:var(--green);}
+    .wa-body{padding:18px 14px 20px;display:flex;flex-direction:column;gap:10px;}
+    .wa-msg{max-width:82%;border-radius:10px;padding:9px 13px;font-size:0.82rem;line-height:1.5;animation:msgIn 0.4s ease both;}
+    .wa-msg.them{align-self:flex-start;background:#1f2c23;color:var(--text);border-bottom-left-radius:2px;}
+    .wa-msg.me{align-self:flex-end;background:#005c4b;color:#e9fbe5;border-bottom-right-radius:2px;}
+    .wa-msg .time{display:block;font-size:0.64rem;color:var(--text3);margin-top:4px;text-align:right;}
+    .wa-msg .green{color:var(--green);font-weight:600;}
+    .wa-msg .amber{color:var(--amber);font-weight:600;}
+    .wa-msg.them .time{text-align:left;}
+    .wa-msg:nth-child(1){animation-delay:0.6s;opacity:0;}
+    .wa-msg:nth-child(2){animation-delay:1.0s;opacity:0;}
+    .wa-msg:nth-child(3){animation-delay:1.4s;opacity:0;}
+    .wa-msg:nth-child(4){animation-delay:1.8s;opacity:0;}
+    .wa-msg:nth-child(5){animation-delay:2.2s;opacity:0;}
+    @keyframes msgIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+    .marquee-wrap{overflow:hidden;padding:20px 0;border-top:1px solid var(--border2);border-bottom:1px solid var(--border2);margin:60px 0;}
+    .marquee-track{display:flex;animation:marquee 30s linear infinite;white-space:nowrap;}
+    .marquee-item{display:inline-flex;align-items:center;gap:10px;padding:0 40px;font-family:var(--font-mono);font-size:0.75rem;letter-spacing:0.1em;color:var(--text3);text-transform:uppercase;}
+    .marquee-item .dot{width:5px;height:5px;border-radius:50%;background:var(--green);flex-shrink:0;}
+    @keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+    .stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border2);border:1px solid var(--border2);border-radius:16px;overflow:hidden;margin:80px 0;}
+    .stat{background:var(--bg);padding:36px 28px;text-align:center;}
+    .stat-num{font-family:var(--font-display);font-size:2.6rem;font-weight:900;color:var(--white);letter-spacing:-0.03em;line-height:1;}
+    .stat-num .green{color:var(--green);}
+    .stat-num .amber{color:var(--amber);}
+    .stat-label{margin-top:8px;font-size:0.82rem;color:var(--text3);line-height:1.4;}
+    .section-label{font-family:var(--font-mono);font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--green);margin-bottom:16px;}
+    .section-title{font-family:var(--font-display);font-size:clamp(2rem,5vw,3.4rem);font-weight:700;line-height:1.12;letter-spacing:-0.02em;color:var(--white);max-width:600px;margin-bottom:14px;}
+    .section-title .accent{color:var(--green);font-style:italic;}
+    .section-desc{color:var(--text2);font-size:1rem;max-width:560px;margin-bottom:48px;line-height:1.7;}
+    .how-section{padding:80px 0 100px;}
+    .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:52px;}
+    .step{background:var(--surface);border:1px solid var(--border2);border-radius:16px;padding:30px 26px;transition:border-color 0.25s,transform 0.25s;}
+    .step:hover{border-color:var(--border);transform:translateY(-3px);}
+    .step-num{font-family:var(--font-mono);font-size:0.68rem;letter-spacing:0.15em;color:var(--green);margin-bottom:18px;}
+    .step-icon{width:44px;height:44px;border-radius:10px;background:rgba(37,211,102,0.08);border:1px solid rgba(37,211,102,0.15);display:flex;align-items:center;justify-content:center;margin-bottom:20px;}
+    .step-icon svg{width:22px;height:22px;}
+    .step-title{font-family:var(--font-display);font-size:1.15rem;font-weight:700;color:var(--white);margin-bottom:10px;line-height:1.25;}
+    .step-desc{font-size:0.88rem;color:var(--text2);line-height:1.65;}
+    .step-desc strong{color:var(--green);}
+    .demo-section{padding:80px 0 100px;}
+    .demo-wrapper{display:grid;grid-template-columns:1fr 400px;gap:60px;align-items:center;margin-top:52px;}
+    .demo-steps-list{display:flex;flex-direction:column;gap:12px;margin-top:24px;}
+    .demo-step-item{display:flex;align-items:flex-start;gap:14px;padding:14px 16px;background:var(--surface);border:1px solid var(--border2);border-radius:12px;transition:border-color 0.2s;}
+    .demo-step-item:hover{border-color:var(--border);}
+    .demo-step-num{width:26px;height:26px;border-radius:7px;background:rgba(37,211,102,0.1);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:0.68rem;color:var(--green);flex-shrink:0;margin-top:1px;}
+    .demo-step-text{font-size:0.86rem;color:var(--text2);line-height:1.55;}
+    .demo-step-text strong{color:var(--white);}
+    .phone-frame{position:relative;width:400px;height:760px;flex-shrink:0;}
+    .phone-frame-outer{width:100%;height:100%;background:#1a1a2e;border-radius:44px;border:2px solid rgba(255,255,255,0.08);box-shadow:0 0 0 1px rgba(37,211,102,0.1),0 40px 80px rgba(0,0,0,0.7),0 0 60px rgba(37,211,102,0.05);overflow:hidden;position:relative;}
+    .phone-notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:120px;height:26px;background:#1a1a2e;border-radius:0 0 18px 18px;z-index:10;}
+    .phone-frame iframe{width:100%;height:100%;border:none;border-radius:42px;}
+    .demo-cta{margin-top:24px;padding:14px 18px;background:rgba(37,211,102,0.06);border:1px solid var(--border);border-radius:12px;font-size:0.86rem;color:var(--text2);line-height:1.6;}
+    .demo-cta strong{color:var(--green);}
+    .form-section{padding:100px 0 80px;}
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+    .count-badge{display:inline-flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--border);border-radius:100px;padding:8px 18px;margin-bottom:36px;font-size:0.82rem;color:var(--text2);}
+    .count-badge strong{color:var(--green);}
+    .form-card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:40px;box-shadow:0 20px 60px rgba(0,0,0,0.4);position:relative;overflow:hidden;}
+    .form-card::before{content:"";position:absolute;top:-80px;right:-80px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(37,211,102,0.08) 0%,transparent 70%);pointer-events:none;}
+    .form-group{margin-bottom:20px;}
+    .form-group label{display:block;font-size:0.8rem;font-weight:500;color:var(--text2);letter-spacing:0.04em;margin-bottom:8px;}
+    .form-group label .req{color:var(--green);margin-left:2px;}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+    .or-divider{display:flex;align-items:center;gap:12px;margin:4px 0 20px;}
+    .or-divider::before,.or-divider::after{content:"";flex:1;height:1px;background:var(--border);}
+    .or-divider span{font-family:var(--font-mono);font-size:0.68rem;color:var(--text3);letter-spacing:0.1em;}
+    input,select{width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:13px 16px;font-family:var(--font-body);font-size:0.92rem;color:var(--text);outline:none;transition:border-color 0.2s,box-shadow 0.2s;appearance:none;-webkit-appearance:none;}
+    input::placeholder{color:var(--text3);}
+    input:focus,select:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(37,211,102,0.1);}
+    select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%238db89a'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;background-size:20px;padding-right:40px;cursor:pointer;}
+    select option{background:#0d2218;}
+    .wa-input-wrap{position:relative;}
+    .wa-input-wrap .wa-prefix{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:1.1rem;pointer-events:none;}
+    .wa-input-wrap input{padding-left:42px;}
+    .submit-btn{width:100%;padding:16px 24px;background:var(--green);color:#000;border:none;border-radius:10px;font-family:var(--font-body);font-size:1rem;font-weight:600;cursor:pointer;transition:transform 0.15s,background 0.15s,box-shadow 0.15s;display:flex;align-items:center;justify-content:center;gap:10px;margin-top:8px;}
+    .submit-btn:hover{background:#1ebe57;transform:translateY(-1px);box-shadow:0 8px 24px rgba(37,211,102,0.35);}
+    .submit-btn:disabled{opacity:0.6;cursor:not-allowed;transform:none;}
+    .btn-icon{width:20px;height:20px;fill:#000;flex-shrink:0;}
+    .spinner{width:18px;height:18px;border:2px solid rgba(0,0,0,0.25);border-top-color:#000;border-radius:50%;animation:spin 0.6s linear infinite;display:none;}
+    .submit-btn.loading .spinner{display:block;}
+    .submit-btn.loading .btn-text,.submit-btn.loading .btn-icon{display:none;}
+    @keyframes spin{to{transform:rotate(360deg);}}
+    .form-message{margin-top:16px;padding:14px 18px;border-radius:10px;font-size:0.88rem;line-height:1.55;display:none;}
+    .form-message.success{display:block;background:rgba(37,211,102,0.08);border:1px solid rgba(37,211,102,0.25);color:#7ee8a0;}
+    .form-message.error{display:block;background:rgba(245,91,91,0.07);border:1px solid rgba(245,91,91,0.2);color:#f79494;}
+    .form-message.info{display:block;background:rgba(245,166,35,0.07);border:1px solid rgba(245,166,35,0.2);color:#f7c96a;}
+    .success-state{display:none;text-align:center;padding:20px 0;}
+    .success-state.show{display:block;}
+    .success-icon{width:64px;height:64px;background:rgba(37,211,102,0.1);border:1px solid rgba(37,211,102,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;animation:scaleIn 0.5s cubic-bezier(0.34,1.56,0.64,1) both;}
+    .success-icon svg{width:30px;height:30px;fill:var(--green);}
+    @keyframes scaleIn{from{opacity:0;transform:scale(0.5);}to{opacity:1;transform:scale(1);}}
+    .success-title{font-family:var(--font-display);font-size:1.6rem;font-weight:700;color:var(--white);margin-bottom:8px;}
+    .success-desc{font-size:0.92rem;color:var(--text2);line-height:1.6;}
+    .success-spot{margin-top:20px;display:inline-block;font-family:var(--font-mono);font-size:0.72rem;letter-spacing:0.15em;color:var(--green);border:1px solid var(--border);border-radius:100px;padding:6px 16px;}
+    footer{padding:40px 0 50px;border-top:1px solid var(--border2);text-align:center;}
+    .footer-logo{font-family:var(--font-display);font-size:1.5rem;font-weight:700;color:var(--white);margin-bottom:10px;}
+    .footer-logo span{color:var(--green);}
+    .footer-tagline{font-size:0.82rem;color:var(--text3);margin-bottom:28px;}
+    .footer-links{display:flex;gap:28px;justify-content:center;flex-wrap:wrap;margin-bottom:24px;}
+    .footer-links a{font-size:0.8rem;color:var(--text3);text-decoration:none;transition:color 0.2s;}
+    .footer-links a:hover{color:var(--green);}
+    .footer-copy{font-size:0.75rem;color:var(--text3);}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+    .reveal{opacity:0;transform:translateY(30px);transition:opacity 0.7s ease,transform 0.7s ease;}
+    .reveal.visible{opacity:1;transform:translateY(0);}
+    .reveal-d1{transition-delay:0.1s;}
+    .reveal-d2{transition-delay:0.2s;}
+    .reveal-d3{transition-delay:0.3s;}
+    @media(max-width:900px){.demo-wrapper{grid-template-columns:1fr;}.phone-frame{width:100%;max-width:360px;height:680px;margin:0 auto;}}
+    @media(max-width:768px){nav{padding:16px 20px;}.steps{grid-template-columns:1fr;}.stats-row{grid-template-columns:1fr;}.form-grid{grid-template-columns:1fr;gap:40px;}.form-row{grid-template-columns:1fr;}.form-card{padding:28px 20px;}.hero{padding:110px 20px 60px;}}
+  </style>
+</head>
+<body>
+<div class="kente-overlay"></div>
+<canvas id="bg-canvas"></canvas>
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.37 5.07L2 22l5.07-1.35A9.95 9.95 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm5.07 13.93c-.22.62-1.27 1.19-1.75 1.26-.44.07-1 .1-1.62-.1-.38-.12-.86-.28-1.48-.55-2.61-1.13-4.31-3.77-4.44-3.94-.13-.17-1.05-1.4-1.05-2.67 0-1.27.66-1.89.9-2.14.22-.25.49-.31.65-.31.16 0 .33 0 .47.01.16.01.37-.06.58.44.22.52.74 1.8.8 1.93.07.13.11.28.02.45-.09.17-.13.27-.26.41-.13.14-.27.32-.39.43-.13.12-.26.25-.11.5.15.24.67 1.1 1.44 1.78.99.88 1.82 1.15 2.08 1.28.25.13.4.11.55-.07.16-.18.65-.76.82-1.02.18-.26.35-.22.59-.13.24.09 1.52.72 1.78.85.25.13.42.19.48.3.06.11.06.63-.16 1.25z"/></svg></div>
+    <span class="nav-logo-text">BuySafely<span>.Africa</span></span>
+  </a>
+  <a href="#waitlist" class="nav-badge">WAITLIST OPEN</a>
+</nav>
+<section class="hero">
+  <div class="wrapper" style="display:flex;flex-direction:column;align-items:center;">
+    <div class="hero-eyebrow">Now accepting early access signups</div>
+    <h1 class="hero-headline">The Modern<br/><span class="italic">Protocol.</span></h1>
+    <p class="hero-sub">BuySafelyAfrica is the world's first <strong>WhatsApp-native trust Protocol</strong> for African social commerce.<br/><br/>Designed to eliminate online sales scams with a cryptographic <strong>PoD token</strong>. Buy anything on all social media without fear. No apps to download, no accounts to create, no websites to navigate. Just secure trade.</p>
+    <div class="wa-mockup">
+      <div class="wa-header">
+        <div class="wa-avatar"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.37 5.07L2 22l5.07-1.35A9.95 9.95 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm5.07 13.93c-.22.62-1.27 1.19-1.75 1.26-.44.07-1 .1-1.62-.1-.38-.12-.86-.28-1.48-.55-2.61-1.13-4.31-3.77-4.44-3.94-.13-.17-1.05-1.4-1.05-2.67 0-1.27.66-1.89.9-2.14.22-.25.49-.31.65-.31.16 0 .33 0 .47.01.16.01.37-.06.58.44.22.52.74 1.8.8 1.93.07.13.11.28.02.45-.09.17-.13.27-.26.41-.13.14-.27.32-.39.43-.13.12-.26.25-.11.5.15.24.67 1.1 1.44 1.78.99.88 1.82 1.15 2.08 1.28.25.13.4.11.55-.07.16-.18.65-.76.82-1.02.18-.26.35-.22.59-.13.24.09 1.52.72 1.78.85.25.13.42.19.48.3.06.11.06.63-.16 1.25z"/></svg></div>
+        <div><div class="wa-name">BuySafely Protocol</div><div class="wa-status">&#9679; online</div></div>
+      </div>
+      <div class="wa-body">
+        <div class="wa-msg them">&#9989; Order <span class="green">#BS-99BT</span> confirmed!<br/>&#8358;150,000 held in Protocol vault.<span class="time">09:14</span></div>
+        <div class="wa-msg me">What is my PoD token?<span class="time">09:15 &#10003;&#10003;</span></div>
+        <div class="wa-msg them">&#128272; <span class="amber">PoD Token: 847 293</span><br/><small>Give this to the rider ONLY after you inspect and approve your package.</small><span class="time">09:15</span></div>
+        <div class="wa-msg me">Package arrived, everything perfect &#128076;<span class="time">09:47 &#10003;&#10003;</span></div>
+        <div class="wa-msg them">&#128184; Funds released! <span class="green">&#8358;150,000 sent to seller bank.</span> Transaction complete.<span class="time">09:47</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item"><span class="dot"></span>Nigeria</span><span class="marquee-item"><span class="dot"></span>Ghana</span><span class="marquee-item"><span class="dot"></span>Kenya</span><span class="marquee-item"><span class="dot"></span>South Africa</span><span class="marquee-item"><span class="dot"></span>WhatsApp-Native</span><span class="marquee-item"><span class="dot"></span>Zero App Downloads</span><span class="marquee-item"><span class="dot"></span>PoD Token</span><span class="marquee-item"><span class="dot"></span>Zero Scams</span><span class="marquee-item"><span class="dot"></span>Tanzania</span><span class="marquee-item"><span class="dot"></span>Uganda</span><span class="marquee-item"><span class="dot"></span>Zimbabwe</span><span class="marquee-item"><span class="dot"></span>Trust Protocol</span><span class="marquee-item"><span class="dot"></span>Nigeria</span><span class="marquee-item"><span class="dot"></span>Ghana</span><span class="marquee-item"><span class="dot"></span>Kenya</span><span class="marquee-item"><span class="dot"></span>South Africa</span><span class="marquee-item"><span class="dot"></span>WhatsApp-Native</span><span class="marquee-item"><span class="dot"></span>Zero App Downloads</span><span class="marquee-item"><span class="dot"></span>PoD Token</span><span class="marquee-item"><span class="dot"></span>Zero Scams</span><span class="marquee-item"><span class="dot"></span>Tanzania</span><span class="marquee-item"><span class="dot"></span>Uganda</span><span class="marquee-item"><span class="dot"></span>Zimbabwe</span><span class="marquee-item"><span class="dot"></span>Trust Protocol</span>
+  </div>
+</div>
+<div class="wrapper">
+  <div class="stats-row reveal">
+    <div class="stat"><div class="stat-num"><span class="green">&#8358;52B+</span></div><div class="stat-label">Digital payment fraud<br/>in Nigeria &#8212; 2024 alone</div></div>
+    <div class="stat"><div class="stat-num"><span class="amber">320M</span></div><div class="stat-label">WhatsApp users<br/>across Africa</div></div>
+    <div class="stat"><div class="stat-num">95<span class="green">%</span></div><div class="stat-label">Nigeria online population<br/>on WhatsApp &#8212; number 1 globally</div></div>
+  </div>
+</div>
+
+<section class="demo-section" id="demo">
+  <div class="wrapper">
+    <p class="section-label reveal">Interactive Demo</p>
+    <h2 class="section-title reveal reveal-d1">Try it <span class="accent">yourself.</span></h2>
+    <p class="section-desc reveal reveal-d2">This is the real BuySafely app. Click through the full flow &#8212; from seller onboarding all the way to fund release. No signup required.</p>
+    <div class="demo-wrapper">
+      <div class="demo-copy reveal">
+        <div class="demo-steps-list">
+          <div class="demo-step-item"><div class="demo-step-num">01</div><div class="demo-step-text"><strong>My Business Reports</strong> &#8212; Fetches and organises all your daily sales, weekly, monthly, yearly revenue and lets you know which product is making the most revenue. Free. Always. No subscription needed.</div></div>
+        </div>
+        </div>
+        </div>
+        <div class="demo-cta"><strong>Seen enough?</strong> Join the waitlist and be first when we launch in Port Harcourt.<br/><a href="#waitlist" style="color:var(--green);text-decoration:none;font-weight:600;">Secure your spot &#8594;</a></div>
+      </div>
+      <div class="phone-frame reveal reveal-d2">
+        <div class="phone-frame-outer">
+          <div class="phone-notch"></div>
+          <iframe src="/demo.html" title="BuySafely Interactive Demo" loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="form-section" id="waitlist">
+  <div class="wrapper">
+    <div class="form-grid">
+      <div>
+        <p class="section-label reveal">Early Access</p>
+        <h2 class="section-title reveal reveal-d1">Be first to trade <span class="accent">without fear.</span></h2>
+        <p class="section-desc reveal reveal-d2">We are launching in Port Harcourt first, then expanding across Nigeria, Ghana, Kenya and beyond. Join the waitlist and we will reach out before we go live in your city.</p>
+        <div class="count-badge reveal reveal-d3">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="var(--green)"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+          <span><strong id="live-count">0</strong> people already on the waitlist</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:16px;margin-top:8px;" class="reveal">
+          <blockquote style="background:var(--surface);border-left:3px solid var(--green);border-radius:0 10px 10px 0;padding:16px 20px;">
+            <p style="font-size:0.88rem;color:var(--text2);font-style:italic;line-height:1.6;">"If the money is locked until I deliver, I will never have to fear a dishonest buyer again."</p>
+            <cite style="font-size:0.75rem;color:var(--text3);font-style:normal;display:block;margin-top:8px;">&#8212; Fashion vendor, Lagos and Aba</cite>
+          </blockquote>
+          <blockquote style="background:var(--surface);border-left:3px solid var(--amber);border-radius:0 10px 10px 0;padding:16px 20px;">
+            <p style="font-size:0.88rem;color:var(--text2);font-style:italic;line-height:1.6;">"I have 800,000 naira sitting in my account. But I am afraid. If there was something like this, I would have spent that money yesterday."</p>
+            <cite style="font-size:0.75rem;color:var(--text3);font-style:normal;display:block;margin-top:8px;">&#8212; Buyer, Obiakpo, Port Harcourt, Rivers State</cite>
+          </blockquote>
+        </div>
+      </div>
+      <div class="reveal reveal-d2">
+        <div class="form-card">
+          <div id="form-state">
+            <h3 style="font-family:var(--font-display);font-size:1.4rem;font-weight:700;color:var(--white);margin-bottom:6px;">Join the Waitlist</h3>
+            <p style="font-size:0.82rem;color:var(--text3);margin-bottom:28px;">Free. No spam. Just your WhatsApp number &#8212; we will reach out before launch.</p>
+            <form id="waitlist-form" novalidate>
+              <div class="form-group">
+                <label for="whatsapp">WhatsApp number <span class="req">*</span></label>
+                <div class="wa-input-wrap">
+                  <span class="wa-prefix">&#128241;</span>
+                  <input type="tel" id="whatsapp" name="whatsapp" placeholder="+234 801 234 5678" autocomplete="tel" />
+                </div>
+              </div>
+              <button type="submit" class="submit-btn" id="submit-btn">
+                <svg class="btn-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.37 5.07L2 22l5.07-1.35A9.95 9.95 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg>
+                <span class="btn-text">Secure My Spot on the Waitlist</span>
+                <div class="spinner"></div>
+              </button>
+              <div class="form-message" id="form-msg"></div>
+            </form>
+          </div>
+          <div class="success-state" id="success-state">
+            <div class="success-icon"><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg></div>
+            <div class="success-title">You are on the list! &#127881;</div>
+            <div class="success-desc">We will reach out before we launch in your city.<br/>Until then &#8212; trade carefully out there.</div>
+            <span class="success-spot" id="success-spot"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<footer>
+  <div class="wrapper">
+    <div class="footer-logo">BuySafely<span>.Africa</span></div>
+    <div class="footer-tagline">Zero scams. Zero app downloads. Entirely inside WhatsApp.</div>
+    <div class="footer-links">
+      <span id="contact-email"></span>
+      <a href="#waitlist">Join Waitlist</a>
+      <a href="#demo">Live Demo</a>
+      <a href="#waitlist">Developer API</a>
+    </div>
+    <div class="footer-copy">2026 BuySafely. All rights reserved. buysafelyafrica.online</div>
+  </div>
+</footer>
+<script>
+(function(){
+  var canvas=document.getElementById("bg-canvas");
+  var ctx=canvas.getContext("2d");
+  function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
+  resize();
+  window.addEventListener("resize",resize);
+  var particles=[];
+  for(var i=0;i<55;i++){particles.push({x:Math.random()*window.innerWidth,y:Math.random()*window.innerHeight,r:0.8+Math.random()*2.2,vx:(Math.random()-0.5)*0.18,vy:-0.05-Math.random()*0.18,alpha:0.1+Math.random()*0.35,color:Math.random()>0.7?"#F5A623":"#25D366"});}
+  function drawSym(ctx,x,y,s,t){ctx.beginPath();if(t===0){ctx.arc(x,y,s,0,Math.PI*2);ctx.arc(x,y,s*0.6,0,Math.PI*2,true);}else if(t===1){ctx.moveTo(x,y-s);ctx.lineTo(x+s,y);ctx.lineTo(x,y+s);ctx.lineTo(x-s,y);ctx.closePath();}else{ctx.moveTo(x,y-s);ctx.lineTo(x+s,y+s);ctx.lineTo(x-s,y+s);ctx.closePath();}ctx.stroke();}
+  var syms=[];
+  for(var j=0;j<12;j++){syms.push({x:(j%4)*(window.innerWidth/4)+Math.random()*200-100,y:Math.floor(j/4)*(window.innerHeight/3)+Math.random()*150-75,size:12+Math.random()*20,alpha:0.03+Math.random()*0.04,type:Math.floor(Math.random()*3),color:Math.random()>0.5?"#25D366":"#F5A623"});}
+  function draw(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    for(var s=0;s<syms.length;s++){var sym=syms[s];ctx.save();ctx.strokeStyle=sym.color;ctx.lineWidth=0.8;ctx.globalAlpha=sym.alpha;drawSym(ctx,sym.x,sym.y,sym.size,sym.type);ctx.restore();}
+    for(var p=0;p<particles.length;p++){var pt=particles[p];ctx.save();ctx.globalAlpha=pt.alpha;ctx.fillStyle=pt.color;ctx.beginPath();ctx.arc(pt.x,pt.y,pt.r,0,Math.PI*2);ctx.fill();ctx.restore();pt.x+=pt.vx;pt.y+=pt.vy;if(pt.y<-10){pt.y=canvas.height+10;pt.x=Math.random()*canvas.width;}if(pt.x<-10)pt.x=canvas.width+10;if(pt.x>canvas.width+10)pt.x=-10;}
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+var observer=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add("visible");});},{threshold:0.1});
+document.querySelectorAll(".reveal").forEach(function(el){observer.observe(el);});
+
+(function(){
+  var el=document.getElementById("live-count");
+  if(!el)return;
+  fetch("/api/waitlist")
+    .then(function(r){return r.json();})
+    .then(function(d){if(d&&typeof d.count!=="undefined")el.textContent=Number(d.count).toLocaleString();})
+    .catch(function(){});
+})();
+
+document.getElementById("waitlist-form").addEventListener("submit",function(e){
+  e.preventDefault();
+  var btn=document.getElementById("submit-btn");
+  var msgEl=document.getElementById("form-msg");
+  var whatsapp=document.getElementById("whatsapp").value.trim();
+  if(!whatsapp||whatsapp.replace(/\D/g,"").length<7){
+    msgEl.className="form-message error";
+    msgEl.textContent="Please enter a valid WhatsApp number.";
+    document.getElementById("whatsapp").focus();
+    return;
+  }
+  btn.classList.add("loading");
+  btn.disabled=true;
+  msgEl.className="form-message";
+  msgEl.textContent="";
+  fetch("/api/waitlist",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({whatsapp:whatsapp})})
+    .then(function(r){
+      return r.json();
+    })
+    .then(function(d){
+      if(!d.success)throw new Error(d.error||"Something went wrong. Please try again.");
+      document.getElementById("form-state").style.display="none";
+      document.getElementById("success-state").classList.add("show");
+      var countEl=document.getElementById("live-count");
+      if(countEl)countEl.textContent=(parseInt(countEl.textContent.replace(/,/g,""))||0)+1+"";
+      document.getElementById("success-spot").textContent="You are on the waitlist!";
+  // Contact email — written via JS to avoid Cloudflare encoding
+  (function(){
+    var el = document.getElementById("contact-email");
+    if(el){
+      var e = "info" + "@" + "buysafelyafrica.online";
+      el.innerHTML = '<a href="mailto:' + e + '" style="color:var(--text3);text-decoration:none;font-size:0.8rem;transition:color 0.2s;">' + e + '</a>';
+    }
+  })();
+
+
+    })
+    .catch(function(err){
+      msgEl.className="form-message error";
+      msgEl.textContent=err.message||"Something went wrong. Please try again.";
+      btn.classList.remove("loading");
+      btn.disabled=false;
+    });
+});
+</script>
+</body>
+</html>
