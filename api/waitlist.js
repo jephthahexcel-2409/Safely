@@ -2,7 +2,7 @@
 
 const https = require("https");
 
-const SHEET_URL = "https://script.google.com/macros/s/AKfycbzzxI_MyKkLKdYJRHAzHNI46kezKOuEPIYvmAl6l0sH44iR7uA5LQcD6odBJpF7OQctJA/exec";
+const SHEET_URL = "https://script.google.com/macros/s/AKfycbyCeg_iZV8ihEokJ1XKDqylJ0yHEdXTzQdCqSOWYeCD3rkDbCnsKbOrxSkhsk_WArn3tQ/exec";
 const BIN_ID  = "69d3de02856a68218905296f";
 const BIN_KEY = "$2a$10$U36mKod7.UO4LNrj1.9SE.5LF8QDUgdTcGrWAUfero6Ta2DoDQdw6";
 
